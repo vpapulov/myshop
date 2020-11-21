@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>
@@ -7,6 +7,16 @@
     </title>
 </head>
 <body>
+<div>
+    Магазин:
+    <a href="{{ url_for('index') }}">Главная</a>
+    {% if current_user.is_anonymous %}
+        <a href="{{ url_for('login') }}">Login</a>
+    {% else %}
+        {% current_user.username %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+    {% endif %}
+</div>
 {% with messages = get_flashed_messages() %}
     {% if messages %}
         <ul>
