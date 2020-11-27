@@ -6,7 +6,7 @@ from forms import LoginForm
 from models import User
 
 
-def setup_routes(app):
+def init_routes(app):
     @app.route('/')
     @login_required
     def index():
