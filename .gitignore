@@ -3,3 +3,6 @@
 /config.py
 /shop.db
 *.pyc
+*.log
+/static/css/
+/static/js/

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Новый заказ</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.date_order_placed.label }}<br>
+            {{ form.date_order_placed() }}<br>
+            {% for error in form.date_order_placed.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <table class="table-sm">
+            <tr>
+                <td>{{ form.customer.label }}</td><td>{{ form.customer() }}</td>
+            </tr>
+        </table>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

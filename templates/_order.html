@@ -1,0 +1,14 @@
+<table>
+    <tr valign="top">
+        <th></th>
+        <th>Заказ</th>
+        <th>Комментарий</th>
+    </tr>
+    {% for order in orders %}
+        <tr valign="top">
+            <td><img src="{{ order.user.avatar(36) }}"></td>
+            <td>Заказ {{ order.id }} от {{ order.order_date }}</td>
+            <td>{{ order.comment }}</td>
+        </tr>
+    {% endfor %}
+</table>
