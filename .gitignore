@@ -1,8 +1,9 @@
 /venv/
 /.idea/
 /config.py
-/shop.db
+/data/
+/data/shop.db
 *.pyc
 *.log
-/static/css/
-/static/js/
+/project/static/css/
+/project/static/js/

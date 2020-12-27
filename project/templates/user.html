@@ -2,7 +2,7 @@
 
 {% block content %}
     {% if user == current_user %}
-        <p><a href="{{ url_for('edit_profile') }}">Редактировать профиль</a></p>
+        <p><a href="{{ url_for('users.edit_profile') }}">Редактировать профиль</a></p>
     {% endif %}
     <table>
         <tr valign="top">
@@ -15,5 +15,5 @@
         </tr>
     </table>
     <hr>
-    {% include '_order.html' %}
+    {% include 'order_list.html' %}
 {% endblock %}

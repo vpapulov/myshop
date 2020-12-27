@@ -1,8 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, DateField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, EqualTo, Email, ValidationError, Length
-
-from models import User
 
 
 class LoginForm(FlaskForm):
@@ -45,10 +43,3 @@ class EditProfileForm(FlaskForm):
             user = User.query.filter_by(username=self.username.data).first()
             if user is not None:
                 raise ValidationError('Пожалуйста, ипользуйте другое имя пользователя.')
-
-
-class NewOrderForm(FlaskForm):
-    date_order_placed = DateField('Дата', validators=[DataRequired()])
-    customer = StringField('Покупатель', validators=[DataRequired()])
-    comment = StringField('Комментарий', validators=[DataRequired()])
-    submit = SubmitField('Создать')

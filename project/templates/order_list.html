@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Заказы</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Номер</th>
+            <th>Дата</th>
+            <th>Покупатель</th>
+            <th>Комментарий</th>
+        </tr>
+        {% for order in orders %}
+            <tr>
+                <td><a href="{{ url_for('orders.order_edit', order_id=order.id) }}">{{ order.id }}</a></td>
+                <td>{{ order.date_order_placed }}</td>
+                <td>{{ order.customer }}</td>
+                <td>{{ order.comment }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
