@@ -1,4 +1,4 @@
-from flask_login import login_required
+from flask_login import login_required, current_user
 from flask import render_template, Blueprint, request, flash, redirect, url_for
 
 from project import db
@@ -33,11 +33,16 @@ def order_edit(order_id):
 @orders_blueprint.route('/new', methods=['GET', 'POST'])
 @login_required
 def new_order():
-    form = NewOrderForm()
+    form = NewOrderForm(request.form)
     form.customer.choices = [(c.id, c.name) for c in Customer.query.all()]
     if form.validate_on_submit():
-        order = Order()
-        form.populate_obj(order)
+        order = Order(
+            date_order_placed=form.date_order_placed.data,
+            customer_id=form.customer.data,
+            comment=form.comment.data,
+            user_id=current_user
+        )
+        # form.populate_obj(order)
         db.session.add(order)
         db.session.commit()
         flash('Заказ успешно создан.')
