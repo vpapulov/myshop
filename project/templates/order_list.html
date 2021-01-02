@@ -3,20 +3,34 @@
 {% block content %}
     <h1>Заказы</h1>
     <a class="btn btn-info mb-4 mt-3" href="{{ url_for('orders.order_new') }}">Создать</a>
-    <table class="table table-striped">
-        <tr>
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+        <tr class="table-row thead-light">
             <th>Номер</th>
             <th>Дата</th>
             <th>Покупатель</th>
             <th>Комментарий</th>
         </tr>
+        </thead>
+        <tbody>
         {% for order in orders %}
-            <tr>
-                <td><a href="{{ url_for('orders.order_edit', order_id=order.id) }}">{{ order.id }}</a></td>
+            <tr class="table-row clickable-row" data-href="{{ url_for('orders.order_edit', order_id=order.id) }}">
+                <td>{{ order.id }}</td>
                 <td>{{ order.date_order_placed }}</td>
                 <td>{{ order.customer }}</td>
                 <td>{{ order.comment }}</td>
             </tr>
         {% endfor %}
+        </tbody>
     </table>
+{% endblock %}
+
+{% block script %}
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".clickable-row").click(function () {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
 {% endblock %}

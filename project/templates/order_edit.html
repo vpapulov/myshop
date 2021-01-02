@@ -4,23 +4,17 @@
     <h1>{{ title }}</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
-        <table class="table table-borderless">
-            {% for field in form if not field.widget.input_type in ('hidden', 'submit') %}
-                <tr>
-                    <td>{{ field.label() }}</td>
-                    <td>
-                        {{ field }}
-                        {% for error in field.errors %}
-                            <span style="color: red;">[{{ error }}]</span>
-                        {% endfor %}
-                    </td>
-                </tr>
-            {% endfor %}
-            <tr>
-                <td>
-                    {{ form.submit() }}
-                </td>
-            </tr>
-        </table>
+
+        {% for field in form if not field.widget.input_type in ('hidden', 'submit') %}
+            <div class="form-group">
+                {{ field.label() }}
+                {{ field() }}
+                {% for error in field.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {{ form.submit() }}
+        <a class="btn btn-secondary ml-3" href="{{ url_for('orders.order_list') }}">Отмена</a>
     </form>
 {% endblock %}

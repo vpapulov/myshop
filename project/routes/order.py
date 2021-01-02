@@ -13,7 +13,7 @@ orders_blueprint = Blueprint('orders', __name__, url_prefix='/orders', template_
 @orders_blueprint.route('/')
 @login_required
 def order_list():
-    orders = Order.query.all()
+    orders = Order.query.order_by('date_order_placed').all()
     return render_template('order_list.html', title='Список заказов', orders=orders)
 
 
@@ -28,7 +28,7 @@ def order_edit(order_id):
         db.session.commit()
         flash('Изменения были сохранены.')
         return redirect(url_for('orders.order_list'))
-    return render_template('order_edit.html', title='Заказ ' + order_id, form=form)
+    return render_template('order_edit.html', title='Заказ ' + order_id + ' от ' + order.date_order_placed.strftime("%d.%m.%Y"), form=form)
 
 
 @orders_blueprint.route('/new', methods=['GET', 'POST'])
