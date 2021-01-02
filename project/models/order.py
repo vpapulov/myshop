@@ -12,7 +12,7 @@ class Order(db.Model):
     comment = db.Column(db.String(100))
 
     def __repr__(self):
-        return f'<Order {self.id}>'
+        return f'Заказ {self.id} от {self.date_order_placed.strftime("%d.%m.%Y")}'
 
 
 class OrderItems(db.Model):
