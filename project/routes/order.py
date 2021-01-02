@@ -19,7 +19,7 @@ def order_list():
 @login_required
 def order_edit(order_id):
     order = Order.query.filter_by(id=order_id).first_or_404()
-    form = OrderForm(obj=order)
+    form = OrderForm(request.form, obj=order)
     form.customer.choices = [(c.id, c.name) for c in Customer.query.all()]
     if form.validate_on_submit():
         form.populate_obj(order)
@@ -40,7 +40,7 @@ def new_order():
             date_order_placed=form.date_order_placed.data,
             customer_id=form.customer.data,
             comment=form.comment.data,
-            user_id=current_user
+            user_id=current_user.id
         )
         # form.populate_obj(order)
         db.session.add(order)
