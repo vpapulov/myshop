@@ -33,7 +33,7 @@ def order_edit(order_id):
 @orders_blueprint.route('/new', methods=['GET', 'POST'])
 @login_required
 def new_order():
-    form = NewOrderForm(request.form)
+    form = NewOrderForm()
     form.customer.choices = [(c.id, c.name) for c in Customer.query.all()]
     if form.validate_on_submit():
         order = Order(
