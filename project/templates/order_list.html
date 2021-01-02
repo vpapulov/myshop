@@ -2,6 +2,7 @@
 
 {% block content %}
     <h1>Заказы</h1>
+    <a class="btn btn-info mb-4 mt-3" href="{{ url_for('orders.order_new') }}">Создать</a>
     <table class="table table-striped">
         <tr>
             <th>Номер</th>

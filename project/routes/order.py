@@ -1,9 +1,11 @@
+from datetime import datetime
+
 from flask_login import login_required, current_user
-from flask import render_template, Blueprint, request, flash, redirect, url_for
+from flask import render_template, Blueprint, flash, redirect, url_for
 
 from project import db
-from project.forms.order import NewOrderForm, OrderForm
-from project.models.order import Order, Customer
+from project.forms.order import OrderForm
+from project.models.order import Order
 
 orders_blueprint = Blueprint('orders', __name__, url_prefix='/orders', template_folder='templates')
 
@@ -19,8 +21,7 @@ def order_list():
 @login_required
 def order_edit(order_id):
     order = Order.query.filter_by(id=order_id).first_or_404()
-    form = OrderForm(request.form, obj=order)
-    form.customer.choices = [(c.id, c.name) for c in Customer.query.all()]
+    form = OrderForm(obj=order)
     if form.validate_on_submit():
         form.populate_obj(order)
         db.session.add(order)
@@ -32,17 +33,12 @@ def order_edit(order_id):
 
 @orders_blueprint.route('/new', methods=['GET', 'POST'])
 @login_required
-def new_order():
-    form = NewOrderForm()
-    form.customer.choices = [(c.id, c.name) for c in Customer.query.all()]
+def order_new():
+    order = Order(date_order_placed=datetime.now())
+    form = OrderForm(obj=order)
     if form.validate_on_submit():
-        order = Order(
-            date_order_placed=form.date_order_placed.data,
-            customer_id=form.customer.data,
-            comment=form.comment.data,
-            user_id=current_user.id
-        )
-        # form.populate_obj(order)
+        form.populate_obj(order)
+        order.user_id = current_user.id
         db.session.add(order)
         db.session.commit()
         flash('Заказ успешно создан.')
