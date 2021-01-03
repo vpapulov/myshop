@@ -3,7 +3,7 @@ from flask import render_template, Blueprint, flash, redirect, url_for
 
 from project import db
 from project.forms.product import ProductForm
-from project.models.product import Product
+from project.models.product import Product, ProductImage
 
 products_blueprint = Blueprint('products', __name__, url_prefix='/products', template_folder='templates')
 
@@ -26,7 +26,9 @@ def product_view(entity_id):
     #     db.session.commit()
     #     flash('Изменения были сохранены.')
     #     return redirect(url_for('products.product_list'))
-    return render_template('product_view.html', title=obj, form=form)
+    images = ProductImage.query.filter_by(product_id=entity_id)
+    primary_image = ProductImage.query.get(obj.primary_image_id)
+    return render_template('product_view.html', title=obj, form=form, images=images, primary_image=primary_image)
 
 
 @products_blueprint.route('/edit/<int:entity_id>', methods=['GET', 'POST'])
