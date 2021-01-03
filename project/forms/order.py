@@ -18,4 +18,4 @@ class OrderForm(FlaskForm):
                                 get_label='name',
                                 render_kw={'class': 'form-control'})
     comment = StringField('Комментарий', validators=[DataRequired()], render_kw={'class': 'form-control'})
-    submit = SubmitField('Сохранить',render_kw={'class': 'btn btn-info'})
+    submit = SubmitField('Сохранить', render_kw={'class': 'btn btn-info'})

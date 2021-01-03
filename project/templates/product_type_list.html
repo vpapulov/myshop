@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <a class="btn btn-info mb-4 mt-3" href="{{ url_for('product_types.product_type_new') }}">Создать</a>
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+        <tr class="table-row thead-light">
+            <th>Код</th>
+            <th>Наименование</th>
+            <th>Родитель</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in item_list %}
+            <tr class="table-row clickable-row"
+                data-href="{{ url_for('product_types.product_type_edit', entity_id=item.id) }}">
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.parent_name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block script %}
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".clickable-row").click(function () {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
+{% endblock %}

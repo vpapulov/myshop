@@ -17,10 +17,10 @@ def order_list():
     return render_template('order_list.html', title='Заказы', orders=orders)
 
 
-@orders_blueprint.route('/edit/<order_id>', methods=['GET', 'POST'])
+@orders_blueprint.route('/edit/<entity_id>', methods=['GET', 'POST'])
 @login_required
-def order_edit(order_id):
-    order = Order.query.filter_by(id=order_id).first_or_404()
+def order_edit(entity_id):
+    order = Order.query.filter_by(id=entity_id).first_or_404()
     form = OrderForm(obj=order)
     if form.validate_on_submit():
         form.populate_obj(order)
@@ -43,4 +43,4 @@ def order_new():
         db.session.commit()
         flash('Заказ успешно создан.')
         return redirect(url_for('orders.order_list'))
-    return render_template('order_edit.html', title='Новый заказ', form=form)
+    return render_template('order_edit.html', title=f'{Product.ENTITY_NAME} (Новый)', form=form)

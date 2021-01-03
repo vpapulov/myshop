@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+
+        {% for field in form if not field.widget.input_type in ('hidden', 'submit') %}
+            <div class="form-group">
+                {{ field.label() }}
+                {{ field(readonly=True) }}
+                {% for error in field.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+        {% endfor %}
+{#        {{ form.submit() }}#}
+{#        <a class="btn btn-secondary ml-3" href="{{ url_for('orders.order_list') }}">Отмена</a>#}
+    </form>
+{% endblock %}
