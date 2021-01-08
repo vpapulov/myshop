@@ -6,14 +6,16 @@
         {{ form.hidden_tag() }}
         <div class="row">
             <div class="col-6 align-self-center">
-                <a href="{{ url_for('images.file', filename=primary_image.filename) }}">
-                    <img class="img-fluid" src="{{ url_for('images.file', filename=primary_image.filename) }}" alt="">
+                <a href="{{ url_for('products.image', filename=primary_image.filename) }}">
+                    <img class="img-fluid" src="{{ url_for('products.image', filename=primary_image.filename) }}"
+                         alt="">
                 </a>
                 <div class="row mt-5">
                     {% for image in images %}
                         <div class="col-3 align-self-center">
-                            <a href="{{ url_for('images.file', filename=image.filename) }}">
-                                <img class="img-fluid" src="{{ url_for('images.file', filename=image.filename) }}"
+                            <a href="{{ url_for('products.image', filename=image.filename) }}">
+                                <img class="img-fluid img-thumbnail mb-2"
+                                     src="{{ url_for('products.image', filename=image.filename) }}"
                                      alt="">
                             </a>
                         </div>
@@ -31,7 +33,7 @@
                     </div>
                 {% endfor %}
                 {#        {{ form.submit() }}#}
-                {#        <a class="btn btn-secondary ml-3" href="{{ url_for('orders.order_list') }}">Отмена</a>#}
+                {#        <a class="btn btn-secondary ml-3" href="{{ url_for('products.product_list') }}">Отмена</a>#}
             </div>
         </div>
     </form>

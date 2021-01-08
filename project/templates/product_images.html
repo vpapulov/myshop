@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>
+        <div>
+            <a href="{{ url_for('products.product_edit', product_id=product.id) }}">{{ product }}</a>
+            <p class="float-right">Изображения</p>
+        </div>
+    </h1>
+    <a class="btn btn-primary mt-3 mb-3" href="{{ url_for('products.upload_image', product_id=product.id) }}">Добавить
+        новое изображение</a>
+    <div class="row">
+        {% for image in images %}
+            <div class="col-3">
+                <a href="{{ url_for('products.image', filename=image.filename) }}">
+                    <img class="img-fluid img-thumbnail" src="{{ url_for('products.image', filename=image.filename) }}"
+                         alt="">
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

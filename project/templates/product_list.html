@@ -13,7 +13,7 @@
         <tbody>
         {% for item in item_list %}
             <tr class="table-row clickable-row"
-                data-href="{{ url_for('products.product_edit', entity_id=item.id) }}">
+                data-href="{{ url_for('products.product_view', product_id=item.id) }}">
                 <td>{{ item.id }}</td>
                 <td>{{ item.name }}</td>
             </tr>

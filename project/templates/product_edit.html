@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>{{ title }}</h1>
+    <h1>
+        {% if is_new %}
+            {{ product.ENTITY_NAME }} (Новый)
+        {% else %}
+            <div>
+                {{ product }}
+                <a class="float-right" href="{{ url_for('products.images', product_id=product.id) }}">Изображения</a>
+            </div>
+        {% endif %}
+    </h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
 
@@ -15,6 +24,6 @@
             </div>
         {% endfor %}
         {{ form.submit() }}
-        <a class="btn btn-secondary ml-3" href="{{ url_for('orders.order_list') }}">Отмена</a>
+        <a class="btn btn-secondary ml-3" href="{{ url_for('products.product_list') }}">Отмена</a>
     </form>
 {% endblock %}
