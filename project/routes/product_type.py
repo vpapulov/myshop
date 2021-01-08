@@ -35,7 +35,7 @@ def product_type_edit(entity_id):
             obj.parent_id = form.parent.data.id
         db.session.add(obj)
         db.session.commit()
-        flash('Изменения были сохранены.')
+        flash('Изменения были сохранены', 'success')
         return redirect(url_for('product_types.product_type_list'))
     return render_template('product_type_edit.html', title=obj, form=form)
 
@@ -51,6 +51,6 @@ def product_type_new():
             obj.parent_id = form.parent.data.id
         db.session.add(obj)
         db.session.commit()
-        flash(f'{ProductType.ENTITY_NAME} успешно создан.')
+        flash(f'{ProductType.ENTITY_NAME} успешно создан', 'success')
         return redirect(url_for('product_types.product_type_list'))
     return render_template('product_type_edit.html', title=f'{ProductType.ENTITY_NAME} (Новый)', form=form)

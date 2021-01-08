@@ -29,7 +29,7 @@ def login():
     if form.validate_on_submit():
         usr = User.query.filter_by(username=form.username.data).first()
         if usr is None or not usr.check_password(form.password.data):
-            flash('Неверные имя пользователя или пароль')
+            flash('Неверные имя пользователя или пароль', 'error')
             return redirect(url_for('users.login'))
         login_user(usr, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -55,7 +55,7 @@ def register():
         usr.set_password(form.password.data)
         db.session.add(usr)
         db.session.commit()
-        flash('Позравляем с регистрацией! Теперь вы можете войти')
+        flash('Позравляем с регистрацией! Теперь вы можете войти', 'success')
         return redirect(url_for('users.login'))
     return render_template('register.html', title='Регистрация', form=form)
 
@@ -64,7 +64,7 @@ def register():
 @login_required
 def user(username):
     usr = User.query.filter_by(username=username).first_or_404()
-    return render_template('user.html', user=usr)
+    return render_template('user.html', user=usr, title=f'{usr}')
 
 
 @users_blueprint.route('/edit_profile', methods=['GET', 'POST'])
@@ -75,7 +75,7 @@ def edit_profile():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
         db.session.commit()
-        flash('Изменения были сохранены.')
+        flash('Изменения были сохранены', 'success')
         return redirect(url_for('users.edit_profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username

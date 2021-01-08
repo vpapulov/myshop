@@ -26,7 +26,7 @@ def order_edit(entity_id):
         form.populate_obj(order)
         db.session.add(order)
         db.session.commit()
-        flash('Изменения были сохранены.')
+        flash('Изменения были сохранены', 'success')
         return redirect(url_for('orders.order_list'))
     return render_template('order_edit.html', title=order, form=form)
 
@@ -41,6 +41,6 @@ def order_new():
         order.user_id = current_user.id
         db.session.add(order)
         db.session.commit()
-        flash('Заказ успешно создан.')
+        flash('Заказ успешно создан', 'success')
         return redirect(url_for('orders.order_list'))
-    return render_template('order_edit.html', title=f'{Product.ENTITY_NAME} (Новый)', form=form)
+    return render_template('order_edit.html', title=f'{order.ENTITY_NAME} (Новый)', form=form)
