@@ -35,23 +35,24 @@ def checkout():
     if len(basket_items) == 0:
         return redirect(url_for('basket.item_list'))
     try:
-        with db.session.begin() as tran:
-            order = Order()
-            order.date_order_placed = datetime.now()
-            order.user_id = current_user.id
-            order.customer_id = current_user.customer_id
-            tran.commit()
-            for basket_item in basket_items:
-                order_item = OrderItem()
-                order_item.order_id = order.id
-                order_item.product_id = basket_item.product_id
-                order_item.quantity = basket_item.quantity
-                order_item.price = 0
-                order_item.amount = 0
-                tran.add(order_item)
-                tran.delete(basket_item)
-            flash('Заказ успешно оформлен', 'success')
-        return redirect(url_for('product.product_list'))
+        order = Order()
+        order.date_order_placed = datetime.now()
+        order.user_id = current_user.id
+        order.customer_id = current_user.customer_id
+        db.session.add(order)
+        db.session.commit()
+        for basket_item in basket_items:
+            order_item = OrderItem()
+            order_item.order_id = order.id
+            order_item.product_id = basket_item.product_id
+            order_item.quantity = basket_item.quantity
+            order_item.price = 0
+            order_item.amount = 0
+            db.session.add(order_item)
+            db.session.delete(basket_item)
+        db.session.commit()
+        flash('Заказ успешно оформлен', 'success')
+        return redirect(url_for('products.product_list'))
     except Exception as exc:
         flash(str(exc), 'error')
         flash('Ошибка создания заказа', 'error')
