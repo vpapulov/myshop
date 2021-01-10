@@ -7,7 +7,7 @@
         {% else %}
             <div>
                 {{ title }}
-                <a class="float-right" href="{{ url_for('products.images', product_id=product.id) }}">Изображения</a>
+                <a class="float-right" href="{{ url_for('images.product_images', product_id=product.id) }}">Изображения</a>
             </div>
         {% endif %}
     </h1>
@@ -24,6 +24,7 @@
             </div>
         {% endfor %}
         {{ form.submit() }}
-        <a class="btn btn-secondary ml-3" href="{{ url_for('products.product_list') }}">Отмена</a>
+        <a class="btn btn-secondary ml-3"
+           href="{{ url_for('products.product_view', product_id=product.id) }}">Отмена</a>
     </form>
 {% endblock %}

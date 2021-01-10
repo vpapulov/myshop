@@ -6,6 +6,7 @@
         <thead>
         <tr class="table-row thead-light">
             <th></th>
+            <th></th>
             <th>Товар</th>
             <th>Количество</th>
         </tr>
@@ -13,18 +14,23 @@
         <tbody>
         {% for item in item_list %}
             <tr class="table-row">
-                <td>
+                <td width="10" class="align-middle">
                     <form method="post" action="{{ url_for('basket.item_remove', item_id=item.id) }}">
                         <button type="submit" class="btn btn-sm btn-outline-secondary">
                             &#10005
                         </button>
                     </form>
                 </td>
-                <td class="clickable-cell"
+                <td width="100" class="align-middle">
+                    <img src="{{ url_for('images.primary_image_resized', product_id=item.product_id, size=100) }}">
+                </td>
+                <td class="clickable-cell align-middle"
                     data-href="{{ url_for('products.product_view', product_id=item.product_id) }}">
                     {{ item.product }}
                 </td>
-                <td>{{ item.quantity }}</td>
+                <td width="20" class="align-middle">
+                    {{ item.quantity }}
+                </td>
             </tr>
         {% endfor %}
         </tbody>

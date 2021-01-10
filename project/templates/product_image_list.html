@@ -7,13 +7,14 @@
             <p class="float-right">Изображения</p>
         </div>
     </h1>
-    <a class="btn btn-primary mt-3 mb-3" href="{{ url_for('products.upload_image', product_id=product.id) }}">Добавить
+    <a class="btn btn-primary mt-3 mb-3" href="{{ url_for('images.image_new', product_id=product.id) }}">Добавить
         новое изображение</a>
     <div class="row">
         {% for image in images %}
             <div class="col-3">
-                <a href="{{ url_for('products.image', filename=image.filename) }}">
-                    <img class="img-fluid img-thumbnail" src="{{ url_for('products.image', filename=image.filename) }}"
+                <a href="{{ url_for('images.image', image_id=image.id) }}">
+                    <img class="img-fluid img-thumbnail"
+                         src="{{ url_for('images.image_resized', product_id=image.product_id, image_id=image.id, size=250) }}"
                          alt="">
                 </a>
             </div>

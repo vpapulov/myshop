@@ -6,7 +6,7 @@
     <table class="table table-bordered table-condensed table-hover">
         <thead>
         <tr class="table-row thead-light">
-            <th>Код</th>
+            <th></th>
             <th>Наименование</th>
         </tr>
         </thead>
@@ -14,8 +14,14 @@
         {% for item in item_list %}
             <tr class="table-row clickable-row"
                 data-href="{{ url_for('products.product_view', product_id=item.id) }}">
-                <td>{{ item.id }}</td>
-                <td>{{ item.name }}</td>
+                <td width="100">
+                    <img src="{{ url_for('images.primary_image_resized', product_id=item.id, size=100) }}">
+                </td>
+                <td>
+                    {{ item.name }}
+                    <br>
+                    {{ item.description }}
+                </td>
             </tr>
         {% endfor %}
         </tbody>

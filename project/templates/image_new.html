@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <form method=post enctype=multipart/form-data>
+        <input type=file name=file class="form-control-file m-3">
+        <input type=submit value="Добавить" class="btn btn-primary">
+        <a class="btn btn-secondary ml-3"
+           href="{{ url_for('images.product_images', product_id=product.id) }}">Отмена</a>
+    </form>
+{% endblock %}
