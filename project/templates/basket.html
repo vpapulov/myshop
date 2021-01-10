@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+        <tr class="table-row thead-light">
+            <th></th>
+            <th>Товар</th>
+            <th>Количество</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in item_list %}
+            <tr class="table-row">
+                <td>
+                    <form method="post" action="{{ url_for('basket.item_remove', item_id=item.id) }}">
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">
+                            &#10005
+                        </button>
+                    </form>
+                </td>
+                <td class="clickable-cell"
+                    data-href="{{ url_for('products.product_view', product_id=item.product_id) }}">
+                    {{ item.product }}
+                </td>
+                <td>{{ item.quantity }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <form method="post" action="{{ url_for('basket.checkout') }}">
+        <button class="btn btn-lg btn-warning m-2">Оформить заказ</button>
+    </form>
+{% endblock %}
+
+{% block script %}
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".clickable-cell").click(function () {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
+{% endblock %}

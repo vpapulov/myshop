@@ -28,11 +28,3 @@ class OrderItem(db.Model):
     quantity = db.Column(db.Numeric(precision=15, scale=3), nullable=False)
     price = db.Column(db.Numeric(precision=15, scale=2), nullable=False)
     amount = db.Column(db.Numeric(precision=15, scale=2), nullable=False)
-
-
-class BasketItem(db.Model):
-    __tablename__ = 'basket_item'
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), index=True, nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
-    quantity = db.Column(db.Numeric(precision=15, scale=3), nullable=False)

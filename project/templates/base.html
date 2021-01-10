@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="shortcut icon" type="image/icon" href="{{ url_for('static', filename='favicon.ico') }}"/>
     <title>
         {{ title }}
     </title>
@@ -45,10 +46,20 @@
                         </li>
                     {% endif %}
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Поиск">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+                <form class="form-inline my-2 my-lg-0 mr-5">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Найти товары" aria-label="Поиск">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Поиск</button>
                 </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="nav-item" href="{{ url_for('basket.item_list') }}">
+                            <button class="btn my-2 my-lg-0 {% if request.path != url_for('basket.item_list') %} btn-warning {% endif %}">
+                                Корзина
+                            </button>
+                        </a>
+
+                    </li>
+                </ul>
             </div>
         </nav>
     </div>

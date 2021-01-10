@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 
 from project import db
 from project.forms.product import ProductForm
-from project.models.order import BasketItem
+from project.models.basket import BasketItem
 from project.models.product import Product, ProductImage
 from config import Config
 

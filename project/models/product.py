@@ -14,7 +14,7 @@ class Product(db.Model):
     primary_image_id = db.Column(db.Integer, db.ForeignKey('product_image.id'))
 
     def __repr__(self):
-        return f'Товар {self.name} [{self.id}]'
+        return f'"{self.name}" [код {self.id}]'
 
 
 class ProductImage(db.Model):

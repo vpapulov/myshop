@@ -40,11 +40,13 @@ def register_blueprints(app):
     from project.routes.product import products_blueprint
     from project.routes.order import orders_blueprint
     from project.routes.product_type import product_types_blueprint
+    from project.routes.basket import basket_blueprint
 
     app.register_blueprint(users_blueprint)
     app.register_blueprint(product_types_blueprint)
     app.register_blueprint(products_blueprint)
     app.register_blueprint(orders_blueprint)
+    app.register_blueprint(basket_blueprint)
 
     @app.route('/')
     @login_required
