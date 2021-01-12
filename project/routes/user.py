@@ -14,11 +14,11 @@ users_blueprint = Blueprint('users', __name__, url_prefix='/orders', template_fo
 def before_request():
     if current_user.is_authenticated:
         now = datetime.utcnow()
-        if current_user.last_seen is None \
-                or now - current_user.last_seen > timedelta(minutes=1):  # to reduce writing into db
+        if current_user.last_seen is None or now - current_user.last_seen > timedelta(
+                minutes=1):  # to reduce writing to database
             db.session.add(current_user)
-            current_user.last_seen = now
-            db.session.commit()
+        current_user.last_seen = now
+        db.session.commit()
 
 
 @users_blueprint.route('/login', methods=['GET', 'POST'])
