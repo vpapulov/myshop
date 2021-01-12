@@ -13,7 +13,8 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     about_me = db.Column(db.String(500))
     last_seen = db.Column(db.DateTime)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'),
+                            nullable=False)
 
     def __repr__(self):
         return f'<User {self.username}>'

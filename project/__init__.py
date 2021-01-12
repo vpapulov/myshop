@@ -27,7 +27,8 @@ def initialize_extensions(app):
     # Flask-Login configuration
     login.init_app(app)
     login.login_view = 'users.login'
-    login.login_message = 'Пожайлуста войдите, чтобы получить доступ к этой странице.'
+    login.login_message = 'Пожайлуста войдите, чтобы получить доступ к этой ' \
+                          'странице.'
     from project.models.user import User
 
     @login.user_loader

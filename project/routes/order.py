@@ -7,7 +7,8 @@ from project import db
 from project.forms.order import OrderForm
 from project.models.order import Order
 
-orders_blueprint = Blueprint('orders', __name__, url_prefix='/orders', template_folder='templates')
+orders_blueprint = Blueprint('orders', __name__, url_prefix='/orders',
+                             template_folder='templates')
 
 
 @orders_blueprint.route('/')
@@ -43,4 +44,5 @@ def order_new():
         db.session.commit()
         flash('Заказ успешно создан', 'success')
         return redirect(url_for('orders.order_list'))
-    return render_template('order_edit.html', title=f'{order.ENTITY_NAME} (Новый)', form=form)
+    return render_template('order_edit.html',
+                           title=f'{order.ENTITY_NAME} (Новый)', form=form)

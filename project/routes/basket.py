@@ -7,13 +7,15 @@ from project import db
 from project.models.basket import BasketItem
 from project.models.order import Order, OrderItem
 
-basket_blueprint = Blueprint('basket', __name__, url_prefix='/basket', template_folder='templates')
+basket_blueprint = Blueprint('basket', __name__, url_prefix='/basket',
+                             template_folder='templates')
 
 
 @basket_blueprint.route('/')
 @login_required
 def item_list():
-    items = BasketItem.query.filter_by(user_id=current_user.id).order_by('id').all()
+    items = BasketItem.query.filter_by(user_id=current_user.id).order_by(
+        'id').all()
     return render_template('basket.html', title='Корзина', item_list=items)
 
 

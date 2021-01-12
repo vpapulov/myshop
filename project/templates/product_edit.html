@@ -25,6 +25,12 @@
         {% endfor %}
         {{ form.submit() }}
         <a class="btn btn-secondary ml-3"
-           href="{{ url_for('products.product_view', product_id=product.id) }}">Отмена</a>
+            {% if is_new %}
+                href="{{ url_for('products.product_list') }}"
+            {% else %}
+                href="{{ url_for('products.product_view', product_id=product.id) }}"
+            {% endif %}
+            >Отмена
+        </a>
     </form>
 {% endblock %}

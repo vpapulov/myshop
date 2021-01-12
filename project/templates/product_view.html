@@ -10,10 +10,12 @@
         {{ form.hidden_tag() }}
         <div class="row">
             <div class="col-6 align-self-center">
-                <a href="{{ url_for('images.image', image_id=primary_image.id) }}">
-                    <img class="img-fluid" src="{{ url_for('images.image', image_id=primary_image.id) }}"
-                         alt="">
-                </a>
+                {% if primary_image %}
+                    <a href="{{ url_for('images.image', image_id=primary_image.id) }}">
+                        <img class="img-fluid" src="{{ url_for('images.image', image_id=primary_image.id) }}"
+                             alt="">
+                    </a>
+                {% endif %}
                 <div class="row mt-5">
                     {% for image in images %}
                         <div class="col-3 align-self-center">

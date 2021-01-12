@@ -22,10 +22,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ url_for('index') }}">Главная</a>
+                        <a class="nav-link" href="{{ url_for('products.product_list') }}">Каталог</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ url_for('products.product_list') }}">Каталог</a>
+                        <a class="nav-link" href="{{ url_for('index') }}">О магазине</a>
                     </li>
                     {% if current_user.is_anonymous %}
                         <li class="nav-item">
@@ -40,6 +40,9 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ url_for('orders.order_list') }}">Заказы</a>
                                 <a class="dropdown-item" href="{{ url_for('users.edit_profile') }}">Профиль</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ url_for('product_types.product_type_list') }}">Типы товаров</a>
+                                <a class="dropdown-item" href="{{ url_for('products.product_list') }}">Товары</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ url_for('users.logout') }}">Выйти</a>
                             </div>

@@ -8,7 +8,8 @@ class Product(db.Model):
     ENTITY_NAME_PLURAL = 'Товары'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), index=True)
-    product_type_id = db.Column(db.Integer, db.ForeignKey('product_type.id'), nullable=False)
+    product_type_id = db.Column(db.Integer, db.ForeignKey('product_type.id'),
+                                nullable=False)
     product_type = db.relationship(ProductType)
     description = db.Column(db.Text)
     primary_image_id = db.Column(db.Integer, db.ForeignKey('product_image.id'))

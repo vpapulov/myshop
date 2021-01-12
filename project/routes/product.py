@@ -7,14 +7,17 @@ from project.models.basket import BasketItem
 from project.models.product import Product
 from project.models.image import ProductImage
 
-products_blueprint = Blueprint('products', __name__, url_prefix='/products', template_folder='templates')
+products_blueprint = Blueprint('products', __name__, url_prefix='/products',
+                               template_folder='templates')
 
 
 @products_blueprint.route('/')
 @login_required
 def product_list():
     item_list = Product.query.order_by('name').all()
-    return render_template('product_list.html', title=f'{Product.ENTITY_NAME_PLURAL}', item_list=item_list)
+    return render_template('product_list.html',
+                           title=f'{Product.ENTITY_NAME_PLURAL}',
+                           item_list=item_list)
 
 
 @products_blueprint.route('/new', methods=['GET', 'POST'])
@@ -28,7 +31,8 @@ def product_new():
         db.session.commit()
         flash('Элемент успешно создан', 'success')
         return redirect(url_for('products.product_list'))
-    return render_template('product_edit.html', product=product, is_new=True, form=form,
+    return render_template('product_edit.html',
+                           product=product, is_new=True, form=form,
                            title=f'{product.ENTITY_NAME} (Новый)')
 
 
@@ -43,7 +47,8 @@ def product_edit(product_id):
         db.session.commit()
         flash('Изменения были сохранены', 'success')
         return redirect(url_for('products.product_list'))
-    return render_template('product_edit.html', product=product, form=form, title=f'{product}')
+    return render_template('product_edit.html', product=product, form=form,
+                           title=f'{product}')
 
 
 @products_blueprint.route('/<int:product_id>', methods=['GET', 'POST'])
@@ -62,5 +67,6 @@ def product_view(product_id):
         db.session.add(basket_item)
         db.session.commit()
         flash('Товар добавлен в корзину', 'info')
-    return render_template('product_view.html', title=product, form=form, images=image_list,
+    return render_template('product_view.html', title=product, form=form,
+                           images=image_list,
                            primary_image=primary_image, product_id=product_id)

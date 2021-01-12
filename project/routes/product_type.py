@@ -6,7 +6,9 @@ from project import db
 from project.forms.product_type import ProductTypeForm
 from project.models.product_type import ProductType
 
-product_types_blueprint = Blueprint('product_types', __name__, url_prefix='/product_types', template_folder='templates')
+product_types_blueprint = Blueprint('product_types', __name__,
+                                    url_prefix='/product_types',
+                                    template_folder='templates')
 
 
 @product_types_blueprint.route('/')
@@ -19,8 +21,11 @@ def product_type_list():
         '   left join product_type as pp '
         '   on p.parent_id=pp.id '
         'order by p.name')
-    item_list = db.session.query('id', 'name', 'parent_name').from_statement(sql_text).all()
-    return render_template('product_type_list.html', title=ProductType.ENTITY_NAME_PLURAL, item_list=item_list)
+    item_list = db.session.query('id', 'name', 'parent_name').from_statement(
+        sql_text).all()
+    return render_template('product_type_list.html',
+                           title=ProductType.ENTITY_NAME_PLURAL,
+                           item_list=item_list)
 
 
 @product_types_blueprint.route('/edit/<entity_id>', methods=['GET', 'POST'])
@@ -53,4 +58,6 @@ def product_type_new():
         db.session.commit()
         flash(f'{ProductType.ENTITY_NAME} успешно создан', 'success')
         return redirect(url_for('product_types.product_type_list'))
-    return render_template('product_type_edit.html', title=f'{ProductType.ENTITY_NAME} (Новый)', form=form)
+    return render_template('product_type_edit.html',
+                           title=f'{ProductType.ENTITY_NAME} (Новый)',
+                           form=form)

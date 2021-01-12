@@ -6,7 +6,8 @@ class ProductType(db.Model):
     ENTITY_NAME = 'Тип товара'
     ENTITY_NAME_PLURAL = 'Типы товара'
     id = db.Column(db.Integer, primary_key=True)
-    parent_id = db.Column(db.Integer, db.ForeignKey('product_type.id'), index=True)
+    parent_id = db.Column(db.Integer, db.ForeignKey('product_type.id'),
+                          index=True)
     parent = db.relationship('ProductType')
     name = db.Column(db.String(150), index=True, nullable=False)
 
