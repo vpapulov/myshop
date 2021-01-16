@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, DateTimeField
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms_sqlalchemy.orm import QuerySelectField
 from wtforms.validators import DataRequired
 
 from project.models.order import Customer
