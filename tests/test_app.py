@@ -3,6 +3,7 @@ import sys
 import tempfile
 import pytest
 
+# Эта конструкция нужна, чтобы приложение было доступно из папки tests
 sys.path.insert(1,
                 os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
